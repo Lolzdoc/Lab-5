@@ -1,13 +1,42 @@
 package main;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * Created by hansr_000 on 2014-05-08.
  */
 public class Start {
+    String[][] blosum62 = new String[24][24];
+    HashMap<Character,Integer> blosum_Index = new HashMap<Character, Integer>();
     private ArrayList<String> pre(){
         ArrayList<String> inputList = new ArrayList<String>();
+        try{
+            BufferedReader blosumReader = new BufferedReader(new FileReader(new File("C:\\Users\\hansr_000\\IdeaProjects\\Lab-5\\lab 5\\in filer\\BLOSUM62.txt")));
+            String line = "";
+            String[] rows;
+            String Debug= "";
+            int j = 0;
+            while(line != null){
+                line = blosumReader.readLine();
+                rows = line.split(" ");
+                for(int i = 1; i<25;i++){
+                    blosum62[j][i-1] = rows[i];
+                    Debug+=rows[i]+" ";
+                }
+                j=j+1;
+                System.out.println(Debug);
+                Debug = "";
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
         inputList.add(">Sphinx");
         inputList.add("KQRK");
         inputList.add(">Bandersnatch");
@@ -18,7 +47,7 @@ public class Start {
 
     }
     private int allScore(int[][] matrix, char dna_0Component, char dna_1Component){
-        return null;
+        return -1;
 
     }
     public static void main(String[] args){
