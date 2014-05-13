@@ -5,11 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
-/**
- * Created by hansr_000 on 2014-05-08.
- */
 public class Start {
     String[][] blosum62 = new String[24][24];
     HashMap<Character,Integer> blosum_Index = new HashMap<Character, Integer>();
@@ -21,16 +17,20 @@ public class Start {
             String[] rows;
             String Debug= "";
             int j = 0;
+            line = blosumReader.readLine();
+
             while(line != null){
-                line = blosumReader.readLine();
-                rows = line.split(" ");
+
+                System.out.println(line);
+                rows = line.split(" +");
                 for(int i = 1; i<25;i++){
-                    blosum62[j][i-1] = rows[i];
-                    Debug+=rows[i]+" ";
+                    blosum62[j][i-1] = rows[i].trim();
+                    Debug+=" "+ rows[i];
                 }
                 j=j+1;
                 System.out.println(Debug);
                 Debug = "";
+                line = blosumReader.readLine();
             }
         }
         catch (Exception e){
@@ -71,7 +71,6 @@ public class Start {
         }
         for(int i = 1; i<sizeX;i++){
             for(int j = 1; j<sizeY;j++){
-                matrix[i][j]= start.allScore(matrix,dna_0[i],dna_1[j]);
 
 
             }
