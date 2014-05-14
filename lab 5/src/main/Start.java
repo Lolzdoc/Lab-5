@@ -64,10 +64,10 @@ public class Start {
         int sizeY = speciesList.get(1).dna.length();
         matrix = new int[sizeX+1][sizeY+1];
         for(int i = 0; i<sizeX;i++){
-            matrix[i][0] = 0;
+            matrix[i][0] = gap*i;
         }
         for(int i = 0; i<sizeY;i++){
-            matrix[0][i] = 0;
+            matrix[0][i] = gap*i;
 
         }
         Set<Character> a = blosum_Index.keySet();
@@ -106,31 +106,36 @@ public class Start {
         String y_Dna ="";
         int i = dna_0.length-1;
         int j = dna_1.length-1;
-        int superScore = matrix[sizeX-1][sizeY-1];
-        int current_Score = matrix[i][j];
-        int left_Score = matrix[i-1][j];
-        int top_Score = matrix[i][j-1];
-        int diag_Score = matrix[i-1][j-1];
+        int superScore;
+        int current_Score;
+        int left_Score;
+        int top_Score;
+        int diag_Score;
+
+
+
 
         while((i > 0 && j > 0)){
             current_Score = matrix[i][j];
             left_Score = matrix[i-1][j];
             top_Score = matrix[i][j-1];
             diag_Score = matrix[i-1][j-1];
+
             System.out.println("current_Score ="+current_Score+ " left_Score = "+left_Score+" top_Score = "+top_Score + " diag_Score = "+diag_Score);
-            System.out.println(blosum62[blosum_Index.get(dna_0[i-1])][blosum_Index.get(dna_1[j-1])]);
+            System.out.println(dna_0[i-1]+" & "+dna_1[j-1]+" blir: "+blosum62[blosum_Index.get(dna_0[i-1])][blosum_Index.get(dna_1[j-1])]);
+
             if(current_Score == (diag_Score + Integer.parseInt(blosum62[blosum_Index.get(dna_0[i-1])][blosum_Index.get(dna_1[j-1])]))){
-                x_Dna += dna_0[i-1];
-                y_Dna += dna_1[j-1];
+                x_Dna = dna_0[i-1]+x_Dna;
+                y_Dna = dna_1[j-1]+y_Dna;
                 i-=1;
                 j-=1;
             } else if(current_Score == (left_Score+gap)){
-                x_Dna += dna_0[i-1];
-                y_Dna += '-';
+                x_Dna = dna_0[i-1]+x_Dna;
+                y_Dna = '-'+y_Dna;
                 i-=1;
             } else if(current_Score == top_Score + gap){
-                x_Dna += '-';
-                y_Dna += dna_1[j-1];
+                x_Dna = '-'+x_Dna;
+                y_Dna = dna_1[j-1]+y_Dna;
                 j-=1;
             }
             System.out.println("i = "+i+" j = "+j);
