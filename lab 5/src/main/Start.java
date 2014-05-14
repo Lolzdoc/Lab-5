@@ -9,10 +9,11 @@ import java.util.HashMap;
 public class Start {
     String[][] blosum62 = new String[24][24];
     HashMap<Character,Integer> blosum_Index = new HashMap<Character, Integer>();
+
     private ArrayList<String> pre(){
         ArrayList<String> inputList = new ArrayList<String>();
         try{
-            BufferedReader blosumReader = new BufferedReader(new FileReader(new File("C:\\Users\\hansr_000\\IdeaProjects\\Lab-5\\lab 5\\in filer\\BLOSUM62.txt")));
+            BufferedReader blosumReader = new BufferedReader(new FileReader(new File("in filer/BLOSUM62.txt")));
             String line = "";
             String[] rows;
             String Debug= "";
